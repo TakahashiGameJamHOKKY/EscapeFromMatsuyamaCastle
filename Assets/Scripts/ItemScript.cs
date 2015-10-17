@@ -21,6 +21,10 @@ public class ItemScript : MonoBehaviour {
 				mc.SendMessage("addYakisobaScore");
 				Debug.Log("Yakisoba Get!!!");
 			}
+			if(this.tag=="ItemSonota"){
+				mc.SendMessage("goal");
+				Debug.Log ("Goal!!");
+			}
 			Destroy (gameObject); 
 		}
 	}
