@@ -6,8 +6,12 @@ using System;
 public class HUDInGame : MonoBehaviour {
 	public Text scoreText;
 	public Text timeText;
+	public Text gotItemListText;
 	public StopWatch stopWatch;
 	public Int32 scoreInt = 0;
+	Hashtable gotItemNumberList;
+	String gotItemListLabelString;
+	String gotItemListString;
 
 	// Use this for initialization
 	void Start () {
@@ -15,6 +19,13 @@ public class HUDInGame : MonoBehaviour {
 		timeText.text = "Time: 0";
 		stopWatch = new StopWatch ();//Default State is Zero.
 		stopWatch.changeState ();//State: Zero to Play.
+
+		//initialize of gotItemNumberList.
+		this.gotItemNumberList = new Hashtable ();
+		this.gotItemNumberList.Add ("yakisoba", 0);
+		this.gotItemListString = "";
+		this.gotItemListLabelString = "取得したアイテム\n\n";
+		this.gotItemListString = this.gotItemListLabelString;
 	}
 	
 	// Update is called once per frame
@@ -22,6 +33,7 @@ public class HUDInGame : MonoBehaviour {
 		stopWatch.update ();
 		UpdateTime ();
 		UpdateScore ();
+		UpdateGotItemList ();
 	} 
 
 	void UpdateTime(){
@@ -32,8 +44,23 @@ public class HUDInGame : MonoBehaviour {
 		this.scoreText.text = "Score: " + this.scoreInt;
 	}
 
+	void UpdateGotItemList(){
+		this.gotItemListText.text = this.gotItemListString;
+	}
+
 	void addYakisobaScore(){
 		this.scoreInt += 1000;//Yakisoba is 1000Pt?
+		incrementNumberOfGotYakisoba();
+		if ((Int32)this.gotItemNumberList ["yakisoba"] != (Int32)0) {
+			this.gotItemListString = this.gotItemListLabelString + "インディアン焼きそば " + (Int32)this.gotItemNumberList["yakisoba"] + " 個";
+		}
+
+	}
+
+	void incrementNumberOfGotYakisoba(){
+		Int32 tmp = (Int32)this.gotItemNumberList["yakisoba"];
+		tmp += 1;
+		this.gotItemNumberList ["yakisoba"] = tmp;
 	}
 } 
 
