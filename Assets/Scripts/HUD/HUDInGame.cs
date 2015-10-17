@@ -7,6 +7,7 @@ public class HUDInGame : MonoBehaviour {
 	public Text scoreText;
 	public Text timeText;
 	public StopWatch stopWatch;
+	public Int32 scoreInt = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -19,9 +20,22 @@ public class HUDInGame : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		stopWatch.update ();
+		UpdateTime ();
+		UpdateScore ();
+	} 
+
+	void UpdateTime(){
 		timeText.text = "Time: " + stopWatch.getCurrentTimeString ();
 	}
-}
+
+	void UpdateScore(){
+		this.scoreText.text = "Score: " + this.scoreInt;
+	}
+
+	void addYakisobaScore(){
+		this.scoreInt += 1000;//Yakisoba is 1000Pt?
+	}
+} 
 
 public class StopWatch{
 	public TextMesh timeText;
