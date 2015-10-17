@@ -21,7 +21,7 @@ public class JoystickToEvents : MonoBehaviour
         Vector3 moveDirection = referentialShift * stickDirection;
 				
 		Vector2 speedVec =  new Vector2(horizontal, vertical);
-		speed = Mathf.Clamp(speedVec.magnitude, 0, 1);      
+		speed = Mathf.Clamp(speedVec.magnitude, 0, 1);
 
         if (speed > 0.01f) // dead zone
         {
