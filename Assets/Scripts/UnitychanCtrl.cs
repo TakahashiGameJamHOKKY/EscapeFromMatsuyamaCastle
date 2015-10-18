@@ -17,9 +17,12 @@ public class UnitychanCtrl : MonoBehaviour
     //壁判定
     //bool is_kabe = false;
 
+	bool gameOver = false;
+
     void Start()
     {
         animator = GetComponent<Animator>();
+		gameOver = false;
     }
 
     // Update is called once per frame
@@ -136,4 +139,10 @@ public class UnitychanCtrl : MonoBehaviour
     //    rb.isKinematic = true;
     //}
 
+	void Watched () {
+		if (!gameOver) {
+			gameOver = true;
+			FadeManager.Instance.LoadLevel ("GameOver", 0.5f);
+		}
+	}
 }
