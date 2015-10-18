@@ -41,8 +41,14 @@ public class Enemy : MonoBehaviour {
 				player.SendMessage ("Watched");
 			} else {
 				//視界に入っていない時
-				player.SendMessage ("NWatched");
+				//player.SendMessage ("NWatched");
 			}
+		}
+	}
+
+	void OnTriggerEnter (Collider col) {
+		if (col.gameObject.tag == "Player") {
+			player.SendMessage ("Watched");
 		}
 	}
 }
