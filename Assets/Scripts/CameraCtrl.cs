@@ -30,5 +30,6 @@ public class CameraCtrl : MonoBehaviour {
         //遠目
         transform.position = new Vector3(player.transform.position.x + 2.8f, player.transform.position.y + 4.9f, player.transform.position.z - 3.2f);
         transform.rotation = Quaternion.Euler(new Vector3(40, 315, 345));
+
     }
 }
