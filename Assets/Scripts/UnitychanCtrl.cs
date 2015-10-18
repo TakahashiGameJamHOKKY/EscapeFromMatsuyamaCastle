@@ -226,5 +226,8 @@ public class UnitychanCtrl : MonoBehaviour
 		get {
 			return satiety;
 		}
+        set {
+            satiety = value;
+        }
 	}
 }

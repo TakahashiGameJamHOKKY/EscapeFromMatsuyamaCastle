@@ -20,6 +20,9 @@ public class ItemScript : MonoBehaviour {
 				//YouGot1000Pt!
 				mc.SendMessage("addYakisobaScore");
 				Debug.Log("Yakisoba Get!!!");
+
+                UnitychanCtrl unityChan = GameObject.FindGameObjectWithTag("UnityChan").GetComponent<UnitychanCtrl>();
+                unityChan.Satiety = unityChan.Satiety + 50.0f;
 			}
 			if(this.tag=="ItemSonota"){
 				mc.SendMessage("goal");
@@ -27,5 +30,13 @@ public class ItemScript : MonoBehaviour {
 			}
 			Destroy (gameObject); 
 		}
+        if (hit.CompareTag("Player"))
+        {
+            if (this.tag == "ItemYakisoba")
+            {
+
+                Debug.Log("Satiety!!");
+            }
+        }
 	}
 }
