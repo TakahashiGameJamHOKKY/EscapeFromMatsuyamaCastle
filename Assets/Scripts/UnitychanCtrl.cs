@@ -3,6 +3,7 @@ using System.Collections;
 
 public class UnitychanCtrl : MonoBehaviour
 {
+    public GameObject camera;
 
     private Animator animator;
     // Use this for initialization
@@ -28,6 +29,8 @@ public class UnitychanCtrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CameraCtrl camCtrl = camera.GetComponent<CameraCtrl>();
+
 		if (transform.position.y < 90.0f && !gameOver) {
 			gameOver = true;
 			FadeManager.Instance.LoadLevel ("GameOver", 0.5f);
@@ -54,12 +57,22 @@ public class UnitychanCtrl : MonoBehaviour
         {
             if (is_once == false)
             {
-                Vector3 next = new Vector3(0, 0, 0);
-                Vector3 diff = transform.rotation.eulerAngles - next;
+                if (camCtrl.quoter)
+                {
+                    Vector3 next = new Vector3(0, 0, 0);
+                    Vector3 diff = transform.rotation.eulerAngles - next;
 
-                transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles - diff);
+                    transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles - diff);
+                    is_once = true;
+                }
+                //else
+                //{
+                //    Vector3 next = new Vector3(0, 180, 0);
+                //    Vector3 diff = transform.rotation.eulerAngles - next;
 
-                is_once = true;
+                //    transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles - diff);
+                //    is_once = true;
+                //}
             }
 
             transform.position += transform.forward * 0.01f;
@@ -70,41 +83,87 @@ public class UnitychanCtrl : MonoBehaviour
         {
             if (is_once == false )
             {
-                Vector3 next = new Vector3(0, 90, 0);
-                Vector3 diff = transform.rotation.eulerAngles - next;
+                if (camCtrl.quoter)
+                {
+                    Vector3 next = new Vector3(0, 90, 0);
+                    Vector3 diff = transform.rotation.eulerAngles - next;
 
-                transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles - diff);
+                    transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles - diff);
+                    is_once = true;
+
+                    transform.position += transform.forward * 0.01f;
+                    animator.SetBool("is_running", true);
+                }
+            }
+
+            if (camCtrl.quoter == false)
+            {
+                Vector3 next = new Vector3(0, 3, 0);
+                transform.Rotate(next);
                 is_once = true;
             }
-            transform.position += transform.forward * 0.01f;
-            animator.SetBool("is_running", true);
-
         }
         else if (Input.GetKey("left") && (on_right & on_up & on_down) == false)
         {
             if (is_once == false)
             {
-                Vector3 next = new Vector3(0, -90, 0);
-                Vector3 diff = transform.rotation.eulerAngles - next;
+                if (camCtrl.quoter)
+                {
+                    Vector3 next = new Vector3(0, -90, 0);
+                    Vector3 diff = transform.rotation.eulerAngles - next;
 
-                transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles - diff);
+                    transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles - diff);
+                    is_once = true;
+
+                    transform.position += transform.forward * 0.01f;
+                    animator.SetBool("is_running", true);
+                }
+            }
+
+            if(camCtrl.quoter == false)
+            {
+                Vector3 next = new Vector3(0, -3, 0);
+                transform.Rotate(next);
                 is_once = true;
             }
-            transform.position += transform.forward * 0.01f;
-            animator.SetBool("is_running", true);
         }
         else if (Input.GetKey("down") && (on_right & on_left & on_up) == false)
         {
             if (is_once == false)
             {
-                Vector3 next = new Vector3(0, 180, 0);
-                Vector3 diff = transform.rotation.eulerAngles - next;
+                if (camCtrl.quoter)
+                {
 
-                transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles - diff);
-                is_once = true;
+                    Vector3 next = new Vector3(0, 180, 0);
+                    Vector3 diff = transform.rotation.eulerAngles - next;
+
+                    transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles - diff);
+                    is_once = true;
+
+                    transform.position += transform.forward * 0.01f;
+                    animator.SetBool("is_running", true);
+                }
+                //else
+                //{
+                //    Vector3 next = new Vector3(0, 0, 0);
+                //    Vector3 diff = transform.rotation.eulerAngles - next;
+
+                //    transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles - diff);
+                //    is_once = true;
+                //}
             }
-            transform.position += transform.forward * 0.01f;
-            animator.SetBool("is_running", true);
+
+            //if (camCtrl.quoter == false)
+            //{
+
+            //    Vector3 next = new Vector3(0, 0, 0);
+            //    Vector3 diff = transform.rotation.eulerAngles - next;
+
+            //    transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles - diff);
+
+            //    transform.position += transform.forward * 0.01f;
+            //    animator.SetBool("is_running", true);
+            //}
 
         }
         else
