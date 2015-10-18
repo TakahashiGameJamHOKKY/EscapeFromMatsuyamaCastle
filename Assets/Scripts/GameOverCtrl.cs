@@ -5,7 +5,7 @@ public class GameOverCtrl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.anyKey) {
-			FadeManager.Instance.LoadLevel ("Title", 0.5f);
+			FadeManager.Instance.LoadLevel ("inGame", 0.5f);
 		}
 	}
 }
