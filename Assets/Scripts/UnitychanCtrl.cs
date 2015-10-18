@@ -28,6 +28,11 @@ public class UnitychanCtrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		if (transform.position.y < 90.0f && !gameOver) {
+			gameOver = true;
+			FadeManager.Instance.LoadLevel ("GameOver", 0.5f);
+		}
+
         if (Input.GetKeyDown("up"))
         {
             on_up = true;

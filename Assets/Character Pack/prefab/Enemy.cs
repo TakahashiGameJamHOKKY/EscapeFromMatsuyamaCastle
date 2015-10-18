@@ -47,7 +47,7 @@ public class Enemy : MonoBehaviour {
 	}
 
 	void OnTriggerEnter (Collider col) {
-		if (col.gameObject.tag == "UnityChan") {
+		if (col.gameObject.tag == "Player") {
 			player.SendMessage ("Watched");
 		}
 	}
