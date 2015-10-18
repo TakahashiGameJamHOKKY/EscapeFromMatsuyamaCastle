@@ -14,7 +14,7 @@ public class RoundEnemy : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		player = GameObject.FindGameObjectWithTag ("Player");
+		player = GameObject.FindGameObjectWithTag ("UnityChan");
 		mLayerMask = 1 << LayerMask.NameToLayer("Obstacle");
 		rigidbody = GetComponent<Rigidbody> () as Rigidbody;
 		rigidbody.velocity = transform.forward * speed;
@@ -35,7 +35,7 @@ public class RoundEnemy : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider col) {
-		if (col.gameObject.tag == "Player") {
+		if (col.gameObject.tag == "UnityChan") {
 			player.SendMessage ("Watched");
 		}
 
