@@ -19,16 +19,29 @@ public class UnitychanCtrl : MonoBehaviour
 
 	bool gameOver = false;
 
+	private float satiety = 100f;
+	public float satietyDecrease_perMeter = 10.0f;
+	private Vector3 prevPosition;
+
     void Start()
     {
         animator = GetComponent<Animator>();
 		gameOver = false;
+		prevPosition = transform.position;
+		satiety = 100f;
     }
 
     // Update is called once per frame
     void Update()
     {
 		if (transform.position.y < 90.0f && !gameOver) {
+			gameOver = true;
+			FadeManager.Instance.LoadLevel ("GameOver", 0.5f);
+		}
+
+		satiety -= Mathf.Sqrt ((transform.position - prevPosition).sqrMagnitude) * satietyDecrease_perMeter;
+		prevPosition = transform.position;
+		if (satiety <= 0f && !gameOver) {
 			gameOver = true;
 			FadeManager.Instance.LoadLevel ("GameOver", 0.5f);
 		}
@@ -148,6 +161,11 @@ public class UnitychanCtrl : MonoBehaviour
 		if (!gameOver) {
 			gameOver = true;
 			FadeManager.Instance.LoadLevel ("GameOver", 0.5f);
+		}
+	}
+	public float Satiety {
+		get {
+			return satiety;
 		}
 	}
 }
