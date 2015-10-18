@@ -14,6 +14,9 @@ public class UnitychanCtrl : MonoBehaviour
     bool on_left = false;
     bool on_down = false;
 
+    //壁判定
+    //bool is_kabe = false;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -120,4 +123,17 @@ public class UnitychanCtrl : MonoBehaviour
         }
 
     }
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    Rigidbody rb = GetComponent<Rigidbody>();
+    //    rb.isKinematic = false;
+    //}
+
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    Rigidbody rb = GetComponent<Rigidbody>();
+    //    rb.isKinematic = true;
+    //}
+
 }
