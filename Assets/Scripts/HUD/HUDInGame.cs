@@ -8,10 +8,13 @@ public class HUDInGame : MonoBehaviour {
 	public Text timeText;
 	public Text gotItemListText;
 	public StopWatch stopWatch;
-	public Int32 scoreInt = 0;
+	public static Int32 scoreInt = 0;
+	public static Int32 itemScore = 0;
+	public static Int32 scoretimeBonus = 0;
 	Hashtable gotItemNumberList;
 	String gotItemListLabelString;
 	String gotItemListString;
+	Boolean isClear = false;
 
 	// Use this for initialization
 	void Start () {
@@ -41,7 +44,7 @@ public class HUDInGame : MonoBehaviour {
 	}
 
 	void UpdateScore(){
-		this.scoreText.text = "Score: " + this.scoreInt;
+		this.scoreText.text = "Score: " + HUDInGame.getCurrentTotalScore();
 	}
 
 	void UpdateGotItemList(){
@@ -49,7 +52,8 @@ public class HUDInGame : MonoBehaviour {
 	}
 
 	void addYakisobaScore(){
-		this.scoreInt += 1000;//Yakisoba is 1000Pt?
+		HUDInGame.addScore (1000);//Yakisoba is 1000Pt?
+		HUDInGame.itemScore += 1000;
 		incrementNumberOfGotYakisoba();
 		if ((Int32)this.gotItemNumberList ["yakisoba"] != (Int32)0) {
 			this.gotItemListString = this.gotItemListLabelString + "インディアン焼きそば " + (Int32)this.gotItemNumberList["yakisoba"] + " 個";
@@ -60,6 +64,13 @@ public class HUDInGame : MonoBehaviour {
 	void goal(){
 		Debug.Log ("Goal!!!!!");
 		Debug.Log(stopWatch.getTimeBonus());
+		HUDInGame.scoretimeBonus = stopWatch.getTimeBonus ();
+		HUDInGame.scoreInt += HUDInGame.scoretimeBonus;// Add TimeBonus.
+
+		if (!isClear) {
+			this.isClear = true;
+			FadeManager.Instance.LoadLevel ("Clear", 0.5f);
+		}
 	}
 
 	void incrementNumberOfGotYakisoba(){
@@ -67,7 +78,15 @@ public class HUDInGame : MonoBehaviour {
 		tmp += 1;
 		this.gotItemNumberList ["yakisoba"] = tmp;
 	}
-} 
+
+	public static int getCurrentTotalScore(){
+		return HUDInGame.scoreInt;
+	}
+	public static void addScore(Int32 score){
+		HUDInGame.scoreInt += score;
+		Debug.Log(HUDInGame.scoreInt);
+	}
+}
 
 public class StopWatch{
 	public TextMesh timeText;
