@@ -48,6 +48,7 @@ public class FadeManager : SingletonMonoBehaviour<FadeManager> {
 	/// <param name="scene">シーン名</param>
 	/// <param name="interval">暗転にかかる時間(秒)</param>
 	private IEnumerator TransScene (string scene, float interval) {
+		yield return new WaitForEndOfFrame ();
 		//だんだん暗く
 		this.isFading = true;
 		float time = 0;
@@ -59,6 +60,7 @@ public class FadeManager : SingletonMonoBehaviour<FadeManager> {
 
 		//シーン切り替え
 		Application.LoadLevel (scene);
+
 
 		time = 0;
 		while (time <= interval) {
