@@ -57,6 +57,11 @@ public class HUDInGame : MonoBehaviour {
 
 	}
 
+	void goal(){
+		Debug.Log ("Goal!!!!!");
+		Debug.Log(stopWatch.getTimeBonus());
+	}
+
 	void incrementNumberOfGotYakisoba(){
 		Int32 tmp = (Int32)this.gotItemNumberList["yakisoba"];
 		tmp += 1;
@@ -70,6 +75,7 @@ public class StopWatch{
 	StopwatchState state = StopwatchState.Zero;
 	TimeSpan lastStopTimeSpan;
 	DateTime startDateTime;
+	Int32 timeBonus;
 
 	enum StopwatchState {
 		Zero,
@@ -104,6 +110,7 @@ public class StopWatch{
 			currentTs = lastStopTimeSpan;
 		}
 		this.timeString = ConvertTimeSpanToString(currentTs);
+		this.timeBonus = (Int32)(500000/currentTs.TotalSeconds);
 	}
 	static public string ConvertTimeSpanToString(TimeSpan ts) {
 		if (ts.Hours > 0 || ts.Days > 0) {
@@ -111,8 +118,12 @@ public class StopWatch{
 		} else {
 			return string.Format("{0}:{1:D2}.{2}", ts.Minutes, ts.Seconds, ts.Milliseconds.ToString("000").Substring(0, 2));
 		}
+
 	}
 	public string getCurrentTimeString(){
 		return this.timeString;
+	}
+	public Int32 getTimeBonus(){
+		return this.timeBonus;
 	}
 }
